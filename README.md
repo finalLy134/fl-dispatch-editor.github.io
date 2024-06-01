@@ -5,7 +5,7 @@ With our new FL-Dispatch Config Editor you're able to create new colors for jobs
 
 Also in dark theme 😍 (Check top-right corner)
 
-### <a src="https://finally134.github.io/fl-dispatch-editor.github.io/" target="_blank">Click here to enter the site</a>
+### <a href="https://finally134.github.io/fl-dispatch-editor.github.io/" target="_blank">Click here to enter the site</a>
 
 Or enter through github-pages on the right.
 
