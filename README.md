@@ -7,37 +7,29 @@ Also in dark theme 😍 (Check top-right corner)
 
 ## How to use?
 
-### Job Name
-The name of the job in your qb jobs list.
+`Job Name` The name of the job in your qb jobs list.
 
-### Job Label
-The label you want to be shown in the dispatch players list. (Example: Active Officers)
+`Job Label` The label you want to be shown in the dispatch players list. (Example: Active Officers)
 
-### Default Background Color / Foreground Color
-The default colors of the job, the colors that will be set if couldn't find any callsign with colors.
+`Default Background Color / Foreground Color` The default colors of the job, the colors that will be set if couldn't find any callsign with colors.
 
-### Add a new color
-Once pressed a new menu will pop up.
+`Add a new color` Once pressed a new menu will pop up.
 
-#### Color Type
-Simply type `r` for ranges or `s` for specials.
+`Color Type` Simply type `r` for ranges or `s` for specials.
 
 One you'll press Continue you'll see the buttons for the current color type you chose.
 
 ### Ranges
 
-#### Start
-What number we start from.
+`Start` What number we start from.
 
-#### End
-At what number do we stop.
+`End` At what number do we stop.
 
 Choose the background and foreground colors as you wish.
 
 ### Specials
 
-#### Prefix
-The prefix before the callsign.
+`Prefix` The prefix before the callsign.
 
 Choose the background and foreground colors as you wish.
 
