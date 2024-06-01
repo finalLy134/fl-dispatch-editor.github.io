@@ -24,19 +24,19 @@ Simply type `r` for ranges or `s` for specials.
 
 One you'll press Continue you'll see the buttons for the current color type you chose.
 
-##### Ranges
+### Ranges
 
-###### Start
+#### Start
 What number we start from.
 
-###### End
+#### End
 At what number do we stop.
 
 Choose the background and foreground colors as you wish.
 
-##### Specials
+### Specials
 
-###### Prefix
+#### Prefix
 The prefix before the callsign.
 
 Choose the background and foreground colors as you wish.
