@@ -67,7 +67,7 @@ button:hover {
 }
 
 input[type="color"] {
-  padding: 8px;
+  padding: 4px;
 }
 
 input[type="color"]:focus {
@@ -173,6 +173,10 @@ input[type="color"]:focus {
   color: #cdcdcd;
 }
 
+.dark-theme button {
+  background-color: #007bff;
+}
+
 .dark-theme input[type="color"] {
   background-color: #444;
   color: #fff;
@@ -183,7 +187,7 @@ input[type="color"]:focus {
 }
 
 .dark-theme button:hover {
-  background-color: #353535;
+  background-color: #0056b3;
 }
 
 .dark-theme .color {
