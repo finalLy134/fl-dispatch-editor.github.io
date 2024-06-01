@@ -156,25 +156,25 @@ input[type="color"]:focus {
 
 /* Dark Theme Styles */
 .dark-theme {
-  background-color: #333;
+  background-color: #313131;
   color: #fff;
 }
 
 .dark-theme .container {
-  background-color: #272727;
-  border: 1px solid #1f1f1f;
-  color: #cdcdcd;
+  background-color: #414141;
+  border: 1px solid #313131;
 }
 
 .dark-theme input,
 .dark-theme button {
-  border: 1px solid #1f1f1f;
-  background-color: #2e2e2e;
+  border: 1px solid #525252;
+  background-color: #313131;
   color: #cdcdcd;
 }
 
 .dark-theme button {
   background-color: #007bff;
+  color: #fff;
 }
 
 .dark-theme .theme-toggle {
@@ -195,12 +195,12 @@ input[type="color"]:focus {
 }
 
 .dark-theme button:hover {
-  background-color: #0056b3;
+  background-color: #007bff;
 }
 
 .dark-theme .color {
   background-color: #444;
-  border-color: #1f1f1f;
+  border-color: #363636;
 }
 
 .dark-theme .generated-container {
