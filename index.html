@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FL-Dispatch Config Editor</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!--
+    Config Editor Working Structure:
+    ===============================
+
+    Job Name, (input)
+    Job Label, (input)
+    Job Colors: (list -> buttons)
+      Default Color: (input)
+      Add a new color: (button)
+        Color Type: (dropdown -> selector)
+          Range, (option 1):
+            Start, (input)
+            End, (input)
+            Colors:
+              BG, (input)
+              FG, (input)
+          Special (option 2):
+            Prefix, (input)
+            Colors:
+              BG, (input)
+              FG, (input)
+  -->
+
+  <h1 class="title">FL-Dispatch Config Editor</h1>
+  <div class="container">
+    <h1>Job Creator Editor</h1>
+    <label for="job-name">Job Name</label>
+    <input type="text" id="job-name" placeholder="Enter job name">
+    <label for="job-label">Job Label</label>
+    <input type="text" id="job-label" placeholder="Enter job label">
+    <label for="job-default-bg">Default Background Color</label>
+    <input type="color" id="job-default-bg" placeholder="Enter default background color">
+    <label for="job-default-fg">Default Foreground Color</label>
+    <input type="color" id="job-default-fg" placeholder="Enter default foreground color">
+    <button class="big-btn add-new-btn" onclick="addNewColor()">Add a new color</button>
+    <div class="colors">
+    </div>
+    <button class="big-btn generate-btn" onclick="generate()">Generate</button>
+    <div class="generated-container hidden">
+      <h2>Generated Code:</h2>
+      <p class="generated-code"></p>
+      <button class="clear-generated-code" onclick="clearGeneratedCode()">Clear</button>
+    </div>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span class="material-symbols-outlined light-mode-icon">dark_mode</span>
+    <span class="material-symbols-outlined dark-mode-icon hidden">light_mode</span>
+  </button>
+  <script>
+    const colorsContainer = document.querySelector(".colors");
+
+    let colors = 0;
+
+    function addNewColor() {
+      if (!colorsContainer) return;
+
+      colors++;
+
+      const colorElement = document.createElement('div');
+      colorElement.classList.add('color');
+      colorElement.classList.add(`color-${colors}`)
+
+      colorElement.innerHTML = `<label for="color-type">Color Type</label>
+        <input id="color-type" placeholder="Enter color type (r/s)">
+        <button id="${colors}" class="continue-btn" onclick="continueToButton(this)">Continue</button>
+        <div class="range-container hidden">
+          <label for="start">Start</label>
+          <input type="number" id="start" placeholder="Enter starting range">
+          <label for="end">End</label>
+          <input type="number" id="end" placeholder="Enter ending range">
+          <label for="r-bg-color">Background Color</label>
+          <input type="color" id="r-bg-color" placeholder="Enter background color">
+          <label for="r-fg-color">Foreground Color</label>
+          <input type="color" id="r-fg-color" placeholder="Enter foreground color">
+        </div>
+        <div class="special-container hidden">
+          <label for="prefix">Prefix</label>
+          <input id="prefix" placeholder="Enter prefix">
+          <label for="s-bg-color">Background Color</label>
+          <input type="color" id="s-bg-color" placeholder="Enter background color">
+          <label for="s-fg-color">Foreground Color</label>
+          <input type="color" id="s-fg-color" placeholder="Enter foreground color">
+        </div>
+        <button class="delete-btn" onclick="deleteColor(this)">Delete</button>`;
+
+      colorsContainer.append(colorElement);
+    }
+
+    function deleteColor(button) {
+      if (!colorsContainer) return;
+
+      const colorElement = button.parentElement;
+      colorsContainer.removeChild(colorElement);
+    }
+
+    function continueToButton(button) {
+      if (!colorsContainer) return;
+
+      const colorId = `.color-${button.id}`;
+      const colorTypeInput = document.querySelector(`${colorId} #color-type`);
+
+      if (!colorTypeInput) {
+        console.error(`Couldn't find color type input inside ${colorId}`);
+        return;
+      }
+
+      let text = colorTypeInput.value;
+      switch (text) {
+        case "r": // Range
+          document.querySelector(`${colorId} .special-container`)?.classList.add('hidden');
+          const rangeContainer = document.querySelector(`${colorId} .range-container`);
+
+          if (!rangeContainer) {
+            console.error(`Couldn't find range container inside ${colorId}`);
+            return;
+          }
+
+          rangeContainer.classList.remove('hidden');
+          break;
+        case "s": // Special
+          document.querySelector(`${colorId} .range-container`)?.classList.add('hidden');
+          const specialContainer = document.querySelector(`${colorId} .special-container`);
+
+          if (!specialContainer) {
+            console.error(`Couldn't find special container inside ${colorId}`);
+            return;
+          }
+
+          specialContainer.classList.remove('hidden');
+          break;
+        default:
+          break;
+      }
+    }
+
+    function generate() {
+      const name = document.querySelector('#job-name')?.value;
+      const label = document.querySelector('#job-label')?.value;
+      const colors = {
+        backgroundColor: document.querySelector('#job-default-bg')?.value,
+        foregroundColor: document.querySelector('#job-default-fg')?.value
+      }
+
+      const job = {
+        [name]: {
+          label: label,
+          colors: colors,
+          ranges: [],
+          special: [],
+        }
+      }
+
+      const colorsContainer = document.querySelector('.colors');
+
+      if (!colorsContainer) {
+        console.error("Couldn't find colors container");
+        return;
+      }
+
+      for (const color of colorsContainer.children) {
+        const colorId = `.${color.className.split(' ').join('.')}`
+        const colorElement = document.querySelector(colorId);
+        const colorTypeInput = colorElement.querySelector('#color-type');
+
+        if (isNullOrEmpty(colorTypeInput.value)) return;
+
+        // Found valid color
+        switch (colorTypeInput.value) {
+          case "r":
+            const rangeContainer = document.querySelector(`${colorId} .range-container`);
+
+            if (!rangeContainer) {
+              console.error(`Couldn't find range container inside ${colorId}`);
+              return;
+            }
+
+            const start = document.querySelector(`${colorId} #start`)?.value;
+            const end = document.querySelector(`${colorId} #end`)?.value;
+            const rBg = document.querySelector(`${colorId} #r-bg-color`)?.value;
+            const rFg = document.querySelector(`${colorId} #r-fg-color`)?.value;
+
+            if (isNullOrEmpty(start) || isNullOrEmpty(end) || isNullOrEmpty(rBg) || isNullOrEmpty(rFg)) {
+              console.error("Please fill out all fields");
+              return;
+            }
+
+            const rangeColor = {
+              start: start,
+              end: end,
+              colors: {
+                backgroundColor: rBg,
+                foregroundColor: rFg
+              }
+            }
+
+            job[name].ranges.push(rangeColor);
+            break;
+          case "s":
+            const specialContainer = document.querySelector(`${colorId} .special-container`);
+
+            if (!specialContainer) {
+              console.error(`Couldn't find special container inside ${colorId}`);
+              return;
+            }
+
+            const prefix = document.querySelector(`${colorId} #prefix`)?.value;
+            const sBg = document.querySelector(`${colorId} #s-bg-color`)?.value;
+            const sFg = document.querySelector(`${colorId} #s-fg-color`)?.value;
+
+            if (isNullOrEmpty(prefix) || isNullOrEmpty(sBg) || isNullOrEmpty(sFg)) {
+              console.error("Please fill out all fields");
+              return;
+            }
+
+            const specialColor = {
+              prefix: prefix,
+              colors: {
+                backgroundColor: sBg,
+                foregroundColor: sFg
+              }
+            }
+
+            job[name].special.push(specialColor);
+            break;
+          default:
+            break;
+        }
+      }
+
+      const generatedCodeText = document.querySelector('.generated-code');
+      const generatedContainer = document.querySelector('.generated-container');
+
+      const prettyJob = JSON.stringify(job, null, 2);
+
+      const formattedJob = prettyJob.slice(1, -1);
+
+      const preFormattedJob = `<pre>${formattedJob}</pre>`;
+
+      generatedCodeText.innerHTML = preFormattedJob;
+      generatedContainer.classList.remove('hidden');
+
+      console.log(job);
+    }
+
+    function clearGeneratedCode() {
+      document.querySelector('.generated-container')?.classList.add('hidden');
+    }
+
+    function isNullOrEmpty(text) {
+      return text === null || text.trim() === '';
+    }
+  </script>
+  <script>
+    let isDarkTheme = false;
+
+    function toggleTheme() {
+      const body = document.body;
+      const lightModeIcon = document.querySelector('.light-mode-icon');
+      const darkModeIcon = document.querySelector('.dark-mode-icon');
+
+      body.classList.toggle('dark-theme');
+      lightModeIcon.classList.toggle('hidden');
+      darkModeIcon.classList.toggle('hidden');
+    }
+  </script>
+</body>
+
+</html>

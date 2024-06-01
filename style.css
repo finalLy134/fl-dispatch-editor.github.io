@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.title {
+  padding-top: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+  color: #000;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type="color"] {
+  padding: 8px;
+}
+
+input[type="color"]:focus {
+  border-color: #007bff;
+}
+
+.colors {
+  margin-bottom: 20px;
+}
+
+.color {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.color label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.color input[type="text"],
+.color input[type="color"] {
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+}
+
+.color .container {
+  margin-top: 10px;
+}
+
+.color .container button {
+  margin-right: 10px;
+}
+
+.range-container,
+.special-container {
+  margin-top: 10px;
+}
+
+.generated-container {
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.generated-container h2 {
+  margin-top: 0;
+}
+
+.generated-code {
+  border: 1px solid #ccc;
+  background-color: rgb(237, 237, 237);
+  padding: 5px;
+  white-space: pre-wrap;
+}
+
+.hidden {
+  display: none;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  outline: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-toggle .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.theme-toggle.light-theme .material-symbols-outlined {
+  color: #000 !important; /* Black color for light theme */
+}
+
+.theme-toggle.dark-theme .material-symbols-outlined {
+  color: #fff !important; /* White color for dark theme */
+}
+
+/* Dark Theme Styles */
+.dark-theme {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-theme .container {
+  background-color: #272727;
+  border: 1px solid #1f1f1f;
+  color: #cdcdcd;
+}
+
+.dark-theme input,
+.dark-theme button {
+  border: 1px solid #1f1f1f;
+  background-color: #2e2e2e;
+  color: #cdcdcd;
+}
+
+.dark-theme input[type="color"] {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-theme input[type="color"]:focus {
+  border-color: #007bff;
+}
+
+.dark-theme button:hover {
+  background-color: #353535;
+}
+
+.dark-theme .color {
+  background-color: #444;
+  border-color: #1f1f1f;
+}
+
+.dark-theme .generated-container {
+  background-color: #363636;
+  border-color: #1f1f1f;
+  color: #fff;
+}
+
+.dark-theme .generated-code {
+  background-color: #222;
+  border-color: #1f1f1f;
+}
