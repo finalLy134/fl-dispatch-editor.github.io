@@ -5,6 +5,10 @@ With our new FL-Dispatch Config Editor you're able to create new colors for jobs
 
 Also in dark theme 😍 (Check top-right corner)
 
+[Click Here to enter the site](https://finally134.github.io/fl-dispatch-editor.github.io/)
+
+Or enter through github-pages on the right.
+
 ## How to use?
 
 `Job Name` The name of the job in your qb jobs list.
