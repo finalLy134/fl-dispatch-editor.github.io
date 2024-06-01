@@ -177,6 +177,14 @@ input[type="color"]:focus {
   background-color: #007bff;
 }
 
+.dark-theme .theme-toggle {
+  background-color: #2e2e2e;
+}
+
+.dark-theme .theme-toggle:hover {
+  background-color: #333;
+}
+
 .dark-theme input[type="color"] {
   background-color: #444;
   color: #fff;
